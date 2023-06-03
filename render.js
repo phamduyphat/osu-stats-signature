@@ -377,7 +377,7 @@ export const getRenderedSVGMini = (data, avatarBase64, userCoverImageBase64) => 
 	}
 
 	//名字
-	templete = templete.replace('{{name}}', getTextSVGPath(textToSVGBold, user.username, 118, 14, 25));
+	templete = templete.replace('{{name}}', getTextSVGPath(textToSVGBold, user.username, 118, 14, 25, 'left top', '#00000') );
 
 	//头像和封面
 	templete = templete.replace('{{avatar-base64}}', avatarBase64);
@@ -389,7 +389,7 @@ export const getRenderedSVGMini = (data, avatarBase64, userCoverImageBase64) => 
 	//区内排名
 	templete = templete.replace(
 		'{{country-ranking}}',
-		getTextSVGPath(textToSVGRegular, libs.formatNumber(user.statistics.country_rank, '#'), 360, 12, 10, 'right top')
+		getTextSVGPath(textToSVGRegular, libs.formatNumber(user.statistics.country_rank, '#'), 360, 12, 10, 'right top','rgba(0, 0, 0, 0.7)')
 	);
 
 	//模式
@@ -398,19 +398,19 @@ export const getRenderedSVGMini = (data, avatarBase64, userCoverImageBase64) => 
 	//等级
 	templete = templete.replace(
 		'{{level}}',
-		getTextSVGPath(textToSVGRegular, 'lv.' + user.statistics.level.current.toString(), 369, 31, 10, 'right top')
+		getTextSVGPath(textToSVGRegular, 'lv.' + user.statistics.level.current.toString(), 369, 31, 10, 'right top', 'rgba(0, 0, 0, 0.7)')
 	);
 
 	//全球排名
 	let globalRanking = libs.formatNumber(user.statistics.global_rank, '#');
-	templete = templete.replace('{{global-ranking}}', getTextSVGPath(textToSVGRegular, globalRanking, 120, 86, globalRanking.length < 10 ? 18 : 17));
+	templete = templete.replace('{{global-ranking}}', getTextSVGPath(textToSVGRegular, globalRanking, 120, 86, globalRanking.length < 10 ? 18 : 17, 'left top', 'rgba(0, 0, 0, 0.7)'));
 
 	//pp
-	templete = templete.replace('{{pp}}', getTextSVGPath(textToSVGRegular, libs.formatNumber(Math.round(user.statistics.pp)), 226, 81.5, 13));
+	templete = templete.replace('{{pp}}', getTextSVGPath(textToSVGRegular, libs.formatNumber(Math.round(user.statistics.pp)), 226, 81.5, 13, 'left top', 'rgba(0, 0, 0, 0.7)'));
 	//acc
-	templete = templete.replace('{{acc}}', getTextSVGPath(textToSVGRegular, user.statistics.hit_accuracy.toFixed(2).toString() + '%', 281, 81.5, 13));
+	templete = templete.replace('{{acc}}', getTextSVGPath(textToSVGRegular, user.statistics.hit_accuracy.toFixed(2).toString() + '%', 281, 81.5, 13,'left top', 'rgba(0, 0, 0, 0.7)'));
 	//游戏次数
-	templete = templete.replace('{{play-count}}', getTextSVGPath(textToSVGRegular, libs.formatNumber(user.statistics.play_count), 336, 81.5, 13));
+	templete = templete.replace('{{play-count}}', getTextSVGPath(textToSVGRegular, libs.formatNumber(user.statistics.play_count), 336, 81.5, 13, 'left top', 'rgba(0, 0, 0, 0.7)'));
 
 	return minifySVG(templete);
 };
