@@ -38,7 +38,7 @@ export const getUser = async (username, playmode = 'std', includeTopPlays = fals
 	
     const body = response.body;
 	let $ = cheerio.load(body);
-	let data = JSON.parse($('.js-react--profile-page.osu-layout').attr('data-initial-data'));
+	let data = JSON.parse($('.js-react--profile-page').attr('data-initial-data'));
 	data.current_mode = playmode;
 
 	if (includeTopPlays) {
@@ -50,7 +50,7 @@ export const getUser = async (username, playmode = 'std', includeTopPlays = fals
 	}
 
 	if (includeSkills) {
-		data.user.skills = await getUserOsuSkills(username);
+		data.user.skills = await getUserOsuSkills(data.user.username);
 	}
 
 	return data;
